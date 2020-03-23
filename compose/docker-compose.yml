@@ -1,0 +1,32 @@
+version: '3'
+
+volumes:
+  pgdata-log_aggregator:
+
+networks:
+  log_aggregator-network:
+
+services:
+  log_aggregator-db:
+    container_name: log_aggregator-db
+    image: postgres:10
+    volumes:
+      - pgdata-log_aggregator:/var/lib/postgresql/data
+    networks:
+      - log_aggregator-network
+
+  log_aggregator-api:
+    container_name: log_aggregator-api
+    build: ../api
+    command: python manage.py runserver 0.0.0.0:8000
+    restart: always
+    env_file:
+      - ../env/dev.env
+    networks:
+      - log_aggregator-network
+    ports:
+      - $WEB_PORT:8000
+    volumes:
+      - ../api:/app
+    depends_on:
+      - log_aggregator-db
