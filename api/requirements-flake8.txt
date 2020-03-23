@@ -1,0 +1,2 @@
+wemake-python-styleguide==0.13.0
+flake8==3.7.9
