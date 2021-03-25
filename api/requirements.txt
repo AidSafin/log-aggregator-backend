@@ -14,5 +14,5 @@ sentry-sdk==0.7.10
 coverage==4.5.1
 pytest==3.9.3
 pytest-django==3.4.4
-PyYAML==5.3
+PyYAML==5.4
 tqdm==4.43.0
